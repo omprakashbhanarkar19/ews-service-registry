@@ -54,10 +54,11 @@ pipeline {
                 withCredentials([string(credentialsId: 'docker-hub-password', variable: 'dockerhubpassword')]) {
                 
                 sh 'docker login -u omprakashbhanarkar -p ${dockerhubpassword}'
+                sh 'docker build -t omprakashbhanarkar/ews-backend-service:$VERSION /root/workspace/Docker-project/ews-service-registry'
+                sh 'docker push omprakashbhanarkar/ews-backend-service:$VERSION'
                 
 }
-              sh 'docker build -t omprakashbhanarkar/ews-backend-service:$VERSION /root/workspace/Docker-project/ews-service-registry'
-              sh 'docker push omprakashbhanarkar/ews-backend-service:$VERSION'
+              
             }
 
 
