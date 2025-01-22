@@ -36,7 +36,7 @@ pipeline {
         steps {
             sh '''
             docker --version
-            docker build -t ews-backend-service:v1 /root/workspace/Docker-project/ews-service-registry
+            docker build -t omprakashbhanarkar/ews-backend-service:v2 /root/workspace/Docker-project/ews-service-registry
             docker images
             '''
         }
@@ -49,7 +49,7 @@ pipeline {
                 sh 'docker login -u omprakashbhanarkar -p ${dockerhubpassword}'
                 
 }
-              sh 'docker push omprakashbhanarkar/ews-backend-service:v1'
+              sh 'docker push omprakashbhanarkar/ews-backend-service:v2'
             }
 
 
