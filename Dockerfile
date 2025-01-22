@@ -1,4 +1,4 @@
-FROM openjdk:17-alphine
+FROM openjdk:17-jdk-alpine
 
 WORKDIR /root/workspace/Docker-project/ews-service-registry
 
