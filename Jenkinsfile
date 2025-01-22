@@ -32,7 +32,17 @@ pipeline {
 
         }
     }
-    stage ("Docker-version") {
+    stage ("loggin dockerhub account") {
+        steps {
+            script {
+                withCredentials([string(credentialsId: 'docker-hub-password', variable: 'dockerhubpassword')]) {
+                
+                sh 'docker login -u omprakashbhanarkar -p ${dockerhubpassword}'   
+            }
+        }
+    }
+    }
+    stage ("Docker build and push ") {
         steps {
             script {
                 sh '''
@@ -43,27 +53,13 @@ pipeline {
                 NEW_VERSION="$major.$minor.$patch"
                 export VERSION=$NEW_VERSION
                 docker build -t omprakashbhanarkar/ews-backend-service:${VERSION} /root/workspace/Docker-project/ews-service-registry
+                docker push omprakashbhanarkar/ews-backend-service:${VERSION}
                 '''
 
             }
             
         }
     }
-    stage ("Push docker image to dockerhub") {
-        steps {
-            script {
-                withCredentials([string(credentialsId: 'docker-hub-password', variable: 'dockerhubpassword')]) {
-                
-                sh 'docker login -u omprakashbhanarkar -p ${dockerhubpassword}'
-                
-                sh 'docker push omprakashbhanarkar/ews-backend-service:${VERSION}'
-                
-}
-              
-            }
-
-
-        }
-    }
+    
 }
 }
