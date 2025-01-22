@@ -45,9 +45,9 @@ pipeline {
         steps {
             script {
                 withCredentials([string(credentialsId: 'docker-hub-password', variable: 'docker-hub-password')]) {
-                sh '''
-                docker login -u omprakashbhanarkar -p ${docker-hub-password}
-                '''    
+                
+                sh "docker login -u omprakashbhanarkar -p ${docker-hub-password}"
+                
 }
               sh "docker push ews-backend-service"
             }
