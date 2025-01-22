@@ -69,6 +69,16 @@ VERSION=$(cat "$VERSION_FILE")
                 export VERSION=$NEW_VERSION
                 docker build -t omprakashbhanarkar/ews-backend-service:${VERSION} /root/workspace/Docker-project/ews-service-registry
                 docker push omprakashbhanarkar/ews-backend-service:${VERSION}
+               
+               # Commit the updated version file to GitHub
+cd /root/workspace/Docker-project/ews-service-registry
+git add "$VERSION_FILE"
+git commit -m "Updated version to $NEW_VERSION"
+git push origin main
+
+echo "Docker image built and pushed with version: ${VERSION}"
+echo "Version file updated and changes pushed to GitHub."
+
                 '''
 
             }
