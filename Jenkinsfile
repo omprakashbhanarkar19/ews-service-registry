@@ -47,10 +47,19 @@ pipeline {
             script {
                 sh '''
                 #!/bin/bash
+                
+                # File to store the current version
+                VERSION_FILE="/root/workspace/Docker-project/ews-service-registry/version.txt"
+                
+                # Check if the version file exists
+if [ ! -f "$VERSION_FILE" ]; then
+    echo "1.0.0" > "$VERSION_FILE"  # Initialize if version file doesn't exist
+fi
+            # Read the current version
+VERSION=$(cat "$VERSION_FILE")
+
                 export VERSION="1.0.0"
                 IFS='.' read -r major minor patch <<< "$VERSION"
-                major=$((major + 1))
-                minor=$((minor + 1))
                 patch=$((patch + 1))
                 NEW_VERSION="$major.$minor.$patch"
                 export VERSION=$NEW_VERSION
