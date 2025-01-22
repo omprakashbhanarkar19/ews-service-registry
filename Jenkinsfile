@@ -35,11 +35,14 @@ pipeline {
     stage ("Docker-version") {
         steps {
             script {
+                sh '''
+                #!/bin/bash
                 export VERSION="1.0.0"
-IFS='.' read -r major minor patch <<< "$VERSION"
-patch=$((patch + 1))
-NEW_VERSION="$major.$minor.$patch"
-export VERSION=$NEW_VERSION
+                IFS='.' read -r major minor patch <<< "$VERSION"
+                patch=$((patch + 1))
+                NEW_VERSION="$major.$minor.$patch"
+                export VERSION=$NEW_VERSION
+                '''
 
             }
             
