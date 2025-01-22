@@ -15,7 +15,7 @@ pipeline {
         steps {
             cleanWs()
             sh '''
-            git clone -b main https://github.com/omprakashbhanarkar19/ews-service-registry.git
+            git clone -b main git@github.com:omprakashbhanarkar19/ews-service-registry.git
             git --version
             mvn --version
             '''
