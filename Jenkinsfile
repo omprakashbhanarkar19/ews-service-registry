@@ -74,7 +74,7 @@ VERSION=$(cat "$VERSION_FILE")
 cd /root/workspace/Docker-project/ews-service-registry
 git add "$VERSION_FILE"
 git commit -m "Updated version to $NEW_VERSION"
-git push origin main
+git push ssh-origin main
 
 echo "Docker image built and pushed with version: ${VERSION}"
 echo "Version file updated and changes pushed to GitHub."
