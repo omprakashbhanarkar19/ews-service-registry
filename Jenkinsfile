@@ -49,6 +49,7 @@ pipeline {
                 #!/bin/bash
                 
                 # File to store the current version
+                chmod 777 /root/workspace/Docker-project/ews-service-registry/version.txt"
                 VERSION_FILE="/root/workspace/Docker-project/ews-service-registry/version.txt"
                 
                 # Check if the version file exists
