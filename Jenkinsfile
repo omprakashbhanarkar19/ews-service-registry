@@ -62,6 +62,8 @@ VERSION=$(cat "$VERSION_FILE")
                 IFS='.' read -r major minor patch <<< "$VERSION"
                 patch=$((patch + 1))
                 NEW_VERSION="$major.$minor.$patch"
+                # Update the version file with the new version
+                echo "$NEW_VERSION" > "$VERSION_FILE"
                 export VERSION=$NEW_VERSION
                 docker build -t omprakashbhanarkar/ews-backend-service:${VERSION} /root/workspace/Docker-project/ews-service-registry
                 docker push omprakashbhanarkar/ews-backend-service:${VERSION}
