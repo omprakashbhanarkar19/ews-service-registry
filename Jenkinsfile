@@ -49,6 +49,8 @@ pipeline {
                 #!/bin/bash
                 export VERSION="1.0.0"
                 IFS='.' read -r major minor patch <<< "$VERSION"
+                major=$((major + 1))
+                minor=$((minor + 1))
                 patch=$((patch + 1))
                 NEW_VERSION="$major.$minor.$patch"
                 export VERSION=$NEW_VERSION
