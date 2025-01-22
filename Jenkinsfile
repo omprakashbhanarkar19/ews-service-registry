@@ -42,7 +42,7 @@ pipeline {
                 patch=$((patch + 1))
                 NEW_VERSION="$major.$minor.$patch"
                 export VERSION=$NEW_VERSION
-                sh 'docker build -t omprakashbhanarkar/ews-backend-service:${VERSION} /root/workspace/Docker-project/ews-service-registry'
+                docker build -t omprakashbhanarkar/ews-backend-service:${VERSION} /root/workspace/Docker-project/ews-service-registry
                 '''
 
             }
@@ -55,7 +55,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'docker-hub-password', variable: 'dockerhubpassword')]) {
                 
                 sh 'docker login -u omprakashbhanarkar -p ${dockerhubpassword}'
-                sh 'docker build -t omprakashbhanarkar/ews-backend-service:${VERSION} /root/workspace/Docker-project/ews-service-registry'
+                
                 sh 'docker push omprakashbhanarkar/ews-backend-service:${VERSION}'
                 
 }
