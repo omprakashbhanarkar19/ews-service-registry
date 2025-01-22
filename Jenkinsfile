@@ -35,7 +35,7 @@ pipeline {
     stage ("Docker") {
         steps {
             sh '''
-            docker -version
+            docker --version
             docker build -t ews-backend-service:v1 .
             docker images
             '''
