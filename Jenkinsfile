@@ -49,7 +49,7 @@ pipeline {
                 sh 'docker login -u omprakashbhanarkar -p ${dockerhubpassword}'
                 
 }
-              sh 'docker push ews-backend-service:v1'
+              sh 'docker push omprakashbhanarkar/ews-backend-service:v1'
             }
 
 
