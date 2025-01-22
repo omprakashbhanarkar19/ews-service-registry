@@ -32,13 +32,17 @@ pipeline {
 
         }
     }
-    stage ("Docker") {
+    stage ("Docker-version") {
         steps {
-            sh '''
-            docker --version
-            docker build -t omprakashbhanarkar/ews-backend-service:v2 /root/workspace/Docker-project/ews-service-registry
-            docker images
-            '''
+            script {
+                export VERSION="1.0.0"
+IFS='.' read -r major minor patch <<< "$VERSION"
+patch=$((patch + 1))
+NEW_VERSION="$major.$minor.$patch"
+export VERSION=$NEW_VERSION
+
+            }
+            
         }
     }
     stage ("Push docker image to dockerhub") {
@@ -49,7 +53,8 @@ pipeline {
                 sh 'docker login -u omprakashbhanarkar -p ${dockerhubpassword}'
                 
 }
-              sh 'docker push omprakashbhanarkar/ews-backend-service:v2'
+              sh 'docker build -t omprakashbhanarkar/ews-backend-service:$VERSION /root/workspace/Docker-project/ews-service-registry'
+              sh 'docker push omprakashbhanarkar/ews-backend-service:$VERSION'
             }
 
 
