@@ -1,7 +1,7 @@
 pipeline {
-    agent {
-        label "docker"
-    }
+
+    agent any
+
     tools {
         maven 'maven'
     }
@@ -18,6 +18,7 @@ pipeline {
             git clone -b main git@github.com:omprakashbhanarkar19/ews-service-registry.git
             git --version
             mvn --version
+            yum install docker -y
             '''
             
         } 
