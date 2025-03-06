@@ -41,7 +41,7 @@ pipeline {
         }
         stage ("docker push to dockerhub") {
             environment {
-                DOCKERHUB_USERNAME = omprakashbhanarkar
+                DOCKERHUB_USERNAME = "omprakashbhanarkar"
             }
             steps {
                 withCredentials([usernameColonPassword(credentialsId: 'dockerhub-cred', variable: 'DOCKER_PASS')]) {
