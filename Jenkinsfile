@@ -42,11 +42,13 @@ pipeline {
         stage ("docker push to dockerhub") {
            
             steps {
+                script {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'DOCKERHUB_PASS', usernameVariable: 'DOCKERHUB_USER')]) {
-                sh '''
-                echo $DOOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin
-                docker push ${DOCKER_IMAGE}
-                '''
+                sh "echo $DOOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin"
+                }
+
+                sh "docker push ${DOCKER_IMAGE}"
+
               }
             }
         }
