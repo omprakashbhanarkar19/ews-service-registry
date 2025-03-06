@@ -1,8 +1,10 @@
 FROM openjdk:17-jdk-alpine
 
+ARG artifact=target/ews-service-registry-0.0.1-SNAPSHOT.jar
+
 WORKDIR /root/workspace/Docker-project/ews-service-registry
 
-COPY target/ews-service-registry-0.0.1-SNAPSHOT.jar ews-service-registry-0.0.1-SNAPSHOT.jar
+COPY ${artifact} ews-service-registry-0.0.1-SNAPSHOT.jar
 
 EXPOSE 8761
 
