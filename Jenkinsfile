@@ -6,6 +6,7 @@ pipeline {
             steps {
                 cleanWs()
                 sh "git clone -b main https://github.com/omprakashbhanarkar19/ews-service-registry.git"
+                sh "pwd"
             }
         }
         stage ("Build") {
@@ -18,11 +19,11 @@ pipeline {
         }
         stage ("sonar-scanner") {
             environment {
-        SONAR_URL = "http://3.91.15.120:9000/"
+                SONAR_URL = "http://3.91.15.120:9000/"
             }
             steps {
                 withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
-          sh 'cd ews-service-registry && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+                sh 'cd ews-service-registry && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
     
                 }
             }
