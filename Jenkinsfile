@@ -40,13 +40,11 @@ pipeline {
             }
         }
         stage ("docker push to dockerhub") {
-            environment {
-                DOCKERHUB_USERNAME = "omprakashbhanarkar"
-            }
+           
             steps {
-                withCredentials([usernameColonPassword(credentialsId: 'dockerhub-cred', variable: 'DOCKER_PASS')]) {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'DOCKERHUB_PASS', usernameVariable: 'DOCKERHUB_USER')]) {
                 sh '''
-                echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                echo $DOOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin
                 docker push ${DOCKER_IMAGE}
                 '''
               }
