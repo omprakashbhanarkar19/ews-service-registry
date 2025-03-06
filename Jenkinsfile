@@ -28,5 +28,16 @@ pipeline {
                 }
             }
         }
+        stage ("docker build and push") {
+            environment {
+                DOCKER_IMAGE = "omprakashbhanarkar/docker-cicd:${BUILD_NUMBER}"
+            }
+            steps {
+                sh '''
+                cd /var/lib/jenkins/workspace/ews-project/ews-service-registry
+                docker build -t ${DOCKER_IMAGE} .
+                '''
+            }
+        }
     }
 }
