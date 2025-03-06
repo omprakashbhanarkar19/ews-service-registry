@@ -27,7 +27,7 @@ pipeline {
                  mvn sonar:sonar  
                 -Dsonar.projectKey=ews-service-registry  
                 -Dsonar.host.url=${SONAR_URL} 
-                -Dsonar.login=$SONAR_AUTH_TOKEN \''''  
+                -Dsonar.login=${SONAR_AUTH_TOKEN} \''''  
     
                 }
             }
