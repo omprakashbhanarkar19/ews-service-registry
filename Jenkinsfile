@@ -22,9 +22,14 @@ pipeline {
                 SONAR_URL = "http://3.91.15.120:9000/"
             }
             steps {
-                withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_AUTH_TOKEN')]) {
-                sh ''' mvn clean verify sonar:sonar -Dsonar.projectKey=/var/lib/jenkins/workspace/ews-project -Dsonar.host.url=${SONAR_URL} -Dsonar.login=$SONAR_AUTH_TOKEN \''''
-                    
+            //    withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_AUTH_TOKEN')]) {
+            //    sh ''' mvn clean verify sonar:sonar \ 
+            //    -Dsonar.projectKey=/var/lib/jenkins/workspace/ews-project \ 
+            //    -Dsonar.host.url=${SONAR_URL} \
+            //    -Dsonar.login=$SONAR_AUTH_TOKEN \'''' 
+                  withSonarQubeEnv("sonarqube") {
+                    sh "mvn sonar:sonar"
+                  }  
     
                 }
             }
