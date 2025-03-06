@@ -23,7 +23,7 @@ pipeline {
             }
             steps {
                 withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_AUTH_TOKEN')]) {
-                sh ''' mvn clean verify sonar:sonar -Dsonar.projectKey=/var/lib/jenkins/workspace/ews-project/ews-service-registry -Dsonar.host.url=${SONAR_URL} -Dsonar.login=$SONAR_AUTH_TOKEN \''''
+                sh ''' mvn clean verify sonar:sonar -Dsonar.projectKey=/var/lib/jenkins/workspace/ews-project -Dsonar.host.url=${SONAR_URL} -Dsonar.login=$SONAR_AUTH_TOKEN \''''
                     
     
                 }
