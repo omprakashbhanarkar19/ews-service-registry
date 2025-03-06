@@ -27,10 +27,10 @@ pipeline {
             //    -Dsonar.projectKey=/var/lib/jenkins/workspace/ews-project \ 
             //    -Dsonar.host.url=${SONAR_URL} \
             //    -Dsonar.login=$SONAR_AUTH_TOKEN \'''' 
-                  mvn clean verify sonar:sonar \
+            sh '''      mvn clean verify sonar:sonar \
   -Dsonar.projectKey=ews-practice-project \
   -Dsonar.host.url=http://3.91.15.120:9000 \
-  -Dsonar.login=9e0af1c978d58dafd27f39fda197ef42a0b8477c  
+  -Dsonar.login=9e0af1c978d58dafd27f39fda197ef42a0b8477c '''  
     
                 }
             }
