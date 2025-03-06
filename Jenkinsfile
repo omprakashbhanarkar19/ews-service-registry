@@ -28,7 +28,7 @@ pipeline {
                 }
             }
         }
-        stage ("docker build and push") {
+        stage ("docker build") {
             environment {
                 DOCKER_IMAGE = "omprakashbhanarkar/docker-cicd:${BUILD_NUMBER}"
             }
@@ -37,6 +37,19 @@ pipeline {
                 cd /var/lib/jenkins/workspace/ews-project/ews-service-registry
                 docker build -t ${DOCKER_IMAGE} .
                 '''
+            }
+        }
+        stage ("docker push to dockerhub") {
+            environment {
+                DOCKERHUB_USERNAME = omprakashbhanarkar
+            }
+            steps {
+                withCredentials([usernameColonPassword(credentialsId: 'dockerhub-cred', variable: 'DOCKER_PASS')]) {
+                sh '''
+                docker login -u ${DOCKERHUB_USERNAME} -p $DOCKER_PASS
+                docker push ${DOCKER_IMAGE}
+                '''
+              }
             }
         }
     }
