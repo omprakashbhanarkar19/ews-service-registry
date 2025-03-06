@@ -27,7 +27,7 @@ pipeline {
             //    -Dsonar.projectKey=/var/lib/jenkins/workspace/ews-project \ 
             //    -Dsonar.host.url=${SONAR_URL} \
             //    -Dsonar.login=$SONAR_AUTH_TOKEN \'''' 
-                  withSonarQubeEnv("sonarqube") {
+                  withSonarQubeEnv('sonarqube') {
                     sh "mvn sonar:sonar"
                   }  
     
