@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage ("checkout") {
             steps {
-                sh "git clone -b https://github.com/omprakashbhanarkar19/ews-service-registry.git"
+                sh "git clone -b main https://github.com/omprakashbhanarkar19/ews-service-registry.git"
             }
         }
         stage ("Build") {
