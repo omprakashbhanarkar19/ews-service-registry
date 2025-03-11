@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: ews-registry-app
-        image: omprakashbhanarkar/ews-cicd:replaceImageTag
+        image: omprakashbhanarkar/ews-cicd:11
         ports:
         - containerPort: 8761     
 
