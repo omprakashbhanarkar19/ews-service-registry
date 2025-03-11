@@ -127,17 +127,26 @@
 
 ## 8. Installing Kubernetes Dashboard
 
+
 - Deploy Kubernetes dashboard:
   ```bash
   kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
   ```
 
+kubectl create namespace kubernetes-dashboard
+
+kubectl apply -f dashboard-adminuser.yml
+
+kubectl get svc -n kubernetes-dashboard
+
+kubectl port-forward svc/kubernetes-dashboard -n kubernetes-dashboard 8081:443 --address=0.0.0.0 &
+
 - Create a token for dashboard access:
   ```bash
   kubectl -n kubernetes-dashboard create token admin-user
   ```
-
 ---
+
 
 ## 9. Argo CD Initial Admin Password
 

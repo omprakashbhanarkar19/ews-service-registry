@@ -40,3 +40,4 @@ kubectl delete -f service.yaml
 kubectl port-forward svc/ews-registry-app 8761:8761 --address=0.0.0.0 & --> ews application to access on chrome
  
 
+kubectl create namespace kubernetes-dashboard
