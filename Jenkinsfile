@@ -57,6 +57,27 @@ pipeline {
               }
             }
         }
+        stage ("Update deployment yaml file into image name") {
+
+            environment {
+                GIT_REPO_NAME = "ews-service-registry"
+                GIT_USER_NAME = "omprakashbhanarkar19"
+            }
+            steps {
+                   withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
+                   sh '''
+                    git config user.email "omprakashbhanarkar19@gmail.com"
+                    git config user.name "omprakash bhanarkar"
+                    BUILD_NUMBER=${BUILD_NUMBER}
+                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" ews-service-registry/Kubernetes/deployment.yml
+                    git add ews-service-registry/Kubernetes/deployment.yml
+                    git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+
+                   '''
+                }
+            }
+        }
     }
 }
 

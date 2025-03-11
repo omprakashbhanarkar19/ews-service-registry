@@ -4,6 +4,11 @@
 username: omprakashbhanarkar
 pass: omprakash@1995
 
+#github
+
+username: omprakashbhanarkar19@gmail.com
+pass: Omprakash@19081995
+
 
 # Jenkins Installation Steps
 
