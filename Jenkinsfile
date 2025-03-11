@@ -5,11 +5,7 @@ pipeline {
         stage ("checkout") {
             steps {
                 cleanWs()
-                sh '''
-                cd ~/kubernetes
-                git clone -b main https://github.com/omprakashbhanarkar19/ews-service-registry.git
-                
-                '''
+                sh "git clone -b main https://github.com/omprakashbhanarkar19/ews-service-registry.git"
             }
         }
         stage ("Build") {
