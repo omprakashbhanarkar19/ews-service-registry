@@ -1,0 +1,65 @@
+pipeline {
+    agent none
+
+    stages {
+        stage ("parallel Build and run") {
+            parallel {
+                    stages {
+                        agent {
+                        label "dev"
+                    }
+                        stage ("build") {
+                            steps {
+                                echo "Building ....."
+                            }
+                        }
+                        stage ("Test") {
+                            steps {
+                                echo "Testing ....."
+                            }
+                        }
+                    }
+                }
+                stage ("prod-agent-pipeline") {
+                    agent {
+                        label "prod"
+                    }
+                    stages {
+                        stage ("Building") {
+                            steps {
+                                echo "Building ...."
+                            }
+                        }
+                        stage ("Testing") {
+                            steps {
+                                echo "Testing ...."
+                            }
+                        }
+                    }
+                }
+            }
+        } 
+    }
+}
+
+/*
+pipeline {
+    agent any
+
+    stages {
+        stage('Trigger Multiple Jobs in Parallel') {
+            parallel {
+                stage('Job A') {
+                    steps {
+                        build job: 'JobA'
+                    }
+                }
+                stage('Job B') {
+                    steps {
+                        build job: 'JobB'
+                    }
+                }
+            }
+        }
+    }
+} */
