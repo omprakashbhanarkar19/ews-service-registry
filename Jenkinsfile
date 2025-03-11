@@ -6,7 +6,6 @@ pipeline {
             steps {
                 cleanWs()
                 sh "git clone -b main https://github.com/omprakashbhanarkar19/ews-service-registry.git"
-                sh "pwd"
             }
         }
         stage ("Build") {
