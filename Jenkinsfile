@@ -12,7 +12,7 @@ pipeline {
         stage ("Build") {
             steps {
                 sh '''
-                cd /var/lib/jenkins/workspace/ews-project/ews-service-registry
+                cd /var/lib/jenkins/workspace/ews-registry-app/ews-service-registry
                 mvn clean install
                 ''' 
             }
@@ -23,18 +23,18 @@ pipeline {
             }
             steps {
                 withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_AUTH_TOKEN')]) {
-                sh ''' cd /var/lib/jenkins/workspace/ews-project/ews-service-registry && mvn sonar:sonar -Dsonar.projectKey=ews-service-registry -Dsonar.host.url=${SONAR_URL} -Dsonar.login=$SONAR_AUTH_TOKEN '''
+                sh ''' cd /var/lib/jenkins/workspace/ews-registry-app/ews-service-registry && mvn sonar:sonar -Dsonar.projectKey=ews-service-registry -Dsonar.host.url=${SONAR_URL} -Dsonar.login=$SONAR_AUTH_TOKEN '''
                 
                 }
             }
         }
         stage ("docker build") {
             environment {
-                DOCKER_IMAGE = "omprakashbhanarkar/docker-cicd:${BUILD_NUMBER}"
+                DOCKER_IMAGE = "omprakashbhanarkar/ews-cicd:${BUILD_NUMBER}"
             }
             steps {
                 sh '''
-                cd /var/lib/jenkins/workspace/ews-project/ews-service-registry
+                cd /var/lib/jenkins/workspace/ews-registry-app/ews-service-registry
                 docker build -t ${DOCKER_IMAGE} .
                 '''
             }
@@ -42,7 +42,7 @@ pipeline {
         stage ("docker push to dockerhub") {
 
             environment {
-                IMAGE = "omprakashbhanarkar/docker-cicd"
+                IMAGE = "omprakashbhanarkar/ews-cicd"
                 TAG = "${BUILD_NUMBER}"
             }
            
