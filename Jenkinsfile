@@ -19,7 +19,7 @@ pipeline {
         }
         stage ("sonar-scanner") {
             environment {
-                SONAR_URL = "http://3.91.15.120:9000/"
+                SONAR_URL = "http://3.87.50.110:9000/"
             }
             steps {
                 withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_AUTH_TOKEN')]) {

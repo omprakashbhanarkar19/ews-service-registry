@@ -1,0 +1,23 @@
+apiVersion: app/v1
+kind: Deployment 
+metadata:
+  name: ews-registry-app
+  labels:
+    app: ews-registry-app
+spec:
+  replica: 2
+  selector:
+    matchLables:
+      app: ews-registry-app
+  template:
+    metadata:
+      lables:
+        app: ews-registry-app
+    spec:
+      containers:
+      - name: ews-registry-app
+        image: omprakashbhanarkar/ews-cicd:replaceImageTag
+        ports:
+        - containerPort: 8761     
+
+   
