@@ -56,7 +56,7 @@ pipeline {
               }
             }
         }
-        stage ("Update deployment yaml file into image name") {
+        /*stage ("Update deployment yaml file into image name") {
 
             environment {
                 GIT_REPO_NAME = "ews-service-registry"
@@ -71,8 +71,8 @@ pipeline {
                     git config --global user.name "omprakash bhanarkar"
                     git init
                     BUILD_NUMBER=${BUILD_NUMBER}
-                    replaceImageTag=${BUILD_NUMBER}  
-                    sed -i "s/${replaceImageTag}/${BUILD_NUMBER}/g" ${DEPLOYMENT_FILE_PATH}
+                     
+                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" ${DEPLOYMENT_FILE_PATH}
                     git add ${DEPLOYMENT_FILE_PATH}
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
@@ -80,7 +80,7 @@ pipeline {
                    '''
                 }
             }
-        }
+        }*/
     }
 }
 
