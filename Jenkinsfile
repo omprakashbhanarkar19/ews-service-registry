@@ -62,6 +62,7 @@ pipeline {
             environment {
                 GIT_REPO_NAME = "ews-service-registry"
                 GIT_USER_NAME = "omprakashbhanarkar19"
+                DEPLOYMENT_FILE_PATH = "/var/lib/jenkins/workspace/ews-registry-app/ews-service-registry/Kubernetes"
             }
             steps {
                    withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
@@ -71,8 +72,8 @@ pipeline {
                     git config --global user.name "omprakash bhanarkar"
                     git init
                     BUILD_NUMBER=${BUILD_NUMBER}
-                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" ews-service-registry/Kubernetes/deployment.yml
-                    git add ews-service-registry/Kubernetes/deployment.yml
+                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" ${DEPLOYMENT_FILE_PATH}
+                    git add ${DEPLOYMENT_FILE_PATH}
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
 
