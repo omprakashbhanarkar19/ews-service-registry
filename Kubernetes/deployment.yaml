@@ -5,7 +5,7 @@ metadata:
   labels:
     app: ews-registry-app
 spec:
-  replicas: 10
+  replicas: 3
   selector:
     matchLabels:
       app: ews-registry-app
