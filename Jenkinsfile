@@ -62,7 +62,7 @@ pipeline {
             environment {
                 GIT_REPO_NAME = "ews-service-registry"
                 GIT_USER_NAME = "omprakashbhanarkar19"
-                DEPLOYMENT_FILE_PATH = "/var/lib/jenkins/workspace/ews-registry-app/ews-service-registry/Kubernetes"
+                DEPLOYMENT_FILE_PATH = "/var/lib/jenkins/workspace/ews-registry-app/ews-service-registry/Kubernetes/deployment.yaml"
             }
             steps {
                    withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
