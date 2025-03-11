@@ -66,8 +66,10 @@ pipeline {
             steps {
                    withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
                    sh '''
+                    cd /var/lib/jenkins/workspace/ews-registry-app/ews-service-registry
                     git config --global user.email "omprakashbhanarkar19@gmail.com"
                     git config --global user.name "omprakash bhanarkar"
+                    git init
                     BUILD_NUMBER=${BUILD_NUMBER}
                     sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" ews-service-registry/Kubernetes/deployment.yml
                     git add ews-service-registry/Kubernetes/deployment.yml
